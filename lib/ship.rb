@@ -6,7 +6,7 @@ class Ship
   def initialize
     @size = 0
     @coords = []
-    @hits = [true]
+    @hits = []
   end
 
   def location_coords!(input)
@@ -15,9 +15,11 @@ class Ship
   end
 
   def sunk?
-    true
+    hits.all? { |x| x == true }
   end
 
   def hit
+    fail 'Ship Already Sunk' if hits.size == size
+    @hits << true
   end
 end
