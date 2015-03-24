@@ -3,10 +3,11 @@ class Ship
   attr_accessor :size, :hits
   attr_reader :coords
 
-  def initialize
-    @size = 0
-    @coords = []
-    @hits = []
+  def initialize(options = {})
+    options = defaults.merge(options)
+    @size = options[:size]
+    @coords = options[:coords]
+    @hits = options[:hits]
   end
 
   def location_coords!(input)
@@ -15,11 +16,17 @@ class Ship
   end
 
   def sunk?
-    hits.all? { |x| x == true }
+    hits.all? { |coord_hit| coord_hit == true }
   end
 
   def hit
     fail 'Ship Already Sunk' if hits.size == size
     @hits << true
+  end
+
+  private
+
+  def defaults
+    { size: 0, coords: [], hits: [] }
   end
 end
