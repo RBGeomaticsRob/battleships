@@ -1,11 +1,13 @@
 # Ssshhhhh!
 class Board
-  DEFAULT_SIZE = 1
+  DEFAULT_SIZE = 2
+  attr_reader :size
   def initialize(size = DEFAULT_SIZE)
-    @grid = Array.new(size) { Array.new(size) {} }
+    @size = size ** 2
+    @grid = Array.new(size) { Array.new(size) { Cell.new } }
   end
 
-  def size
-    @grid.length
+  def position_ship(coords)
+    @position = coords
   end
 end
